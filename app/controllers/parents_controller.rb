@@ -10,6 +10,7 @@ class ParentsController < ApplicationController
   # GET /parents/1
   # GET /parents/1.json
   def show
+    @parent = Parent.find(params[:id])
   end
 
   # GET /parents/new
@@ -24,7 +25,7 @@ class ParentsController < ApplicationController
   # POST /parents
   # POST /parents.json
   def create
-    @parent = Parent.new(parent_params)
+    @parent = Parent.new(params[:parent_params])
 
     respond_to do |format|
       if @parent.save
@@ -40,8 +41,10 @@ class ParentsController < ApplicationController
   # PATCH/PUT /parents/1
   # PATCH/PUT /parents/1.json
   def update
+    @parent = Parent.find(params[:id])
+
     respond_to do |format|
-      if @parent.update(parent_params)
+      if @parent.update(params[:parent_params])
         format.html { redirect_to @parent, notice: 'Parent was successfully updated.' }
         format.json { render :show, status: :ok, location: @parent }
       else
@@ -54,6 +57,8 @@ class ParentsController < ApplicationController
   # DELETE /parents/1
   # DELETE /parents/1.json
   def destroy
+    @parent = Parent.find(params[:id])
+
     @parent.destroy
     respond_to do |format|
       format.html { redirect_to parents_url, notice: 'Parent was successfully destroyed.' }
